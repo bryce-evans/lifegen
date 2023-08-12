@@ -76,7 +76,6 @@ Given that you are roleplaying, it is very important that you do not break chara
 You must only respond in the voice of your character, and you must not use any knowledge that your character would not have.
 `;
 
-
 export const WorldState = {
   "peets_palo_alto":
   "A cozy coffee shop nestled in the heart of Palo Alto, characterized by its warm wooden decor and the inviting aroma of freshly brewed coffee. Regulars and visitors alike seek refuge in its comforting ambiance, often accompanied by the subtle hum of baristas crafting drinks and hushed conversations.",
@@ -106,7 +105,7 @@ export const WorldState = {
   "A serene mountain peak in Marin County that offers breathtaking panoramic views of the Bay Area. Rich in biodiversity, its slopes are dotted with redwoods and various flora, making it a favorite among nature enthusiasts.",
 
 "berkeley_bowl":
-  "Located in Berkeley, this legendary marketplace is a haven for food lovers. With its vast selection of organic produce, rare ingredients, and international delicacies, it's a culinary adventure waiting to be explored."
+  "Located in Berkeley, this legendary marketplace is a haven for food lovers. With its vast selection of organic produce, rare ingredients, and international delicacies, it's a culinary adventure waiting to be explored.",
   "openai_hq":
   "Situated in San Francisco, this cutting-edge facility is the epicenter of advancements in artificial intelligence. The headquarters of OpenAI, with its sleek and modern design, pulses with the energy of researchers and developers pushing the boundaries of AI capabilities.",
 
