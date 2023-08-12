@@ -1,6 +1,5 @@
 import replicate
 
-replicate.Client(api_token="r8_4baYErhYaVQ8AJYHi3ZSkLtNZdrnPh83q920F")
 training = replicate.trainings.create(
     version="stability-ai/sdxl:7ca7f0d3a51cd993449541539270971d38a24d9a0d42f073caf25190d41346d7",
     input={
@@ -8,5 +7,5 @@ training = replicate.trainings.create(
         "is_lora": False,
         "use_face_detection_instead": True,
     },
-    destination="ytsheng/andrej",
+    destination="ytsheng/jordan",
 )
