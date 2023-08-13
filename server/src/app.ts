@@ -156,18 +156,23 @@ const startGame = async () => {
       const previous_action: string = getPreviousAction(user);
       console.log("DEBUG5");
       const other_actions: string = getOtherPlayersActions(user);
+      console.log("result debug5");
+      console.log(other_actions);
 
       // calculate available tokens in prompt (8k limit - 500 for the preamble, 1000 for response, - 1 token per 4 chars in other injected strings)
       // there is some noise here, for example the character name, so we will just estimate and leave some buffer
       const available_tokens =
         7000 - previous_action.length / 4 - other_actions.length / 4 - 500;
 
+      console.log("result worldstate 6");
       const world_state = await getStateOfTheWorld({
         available_tokens: available_tokens,
         query_text: previous_action + "\n" + other_actions,
         collection: world_collection,
         num_results: 30,
       });
+      console.log("result worldstate after 6");
+      console.log(world_state);
 
       broadcast({
         is_server: true,
