@@ -6,16 +6,18 @@ import { BASE_MODEL, WORLD_STATE_COLLECTION_NAME } from "./constants";
 import { ChatMessages } from "./types";
 import { Collection } from "chromadb";
 import { broadcast } from "./websocketManager";
-import axiosRetry from 'axios-retry';
+import axiosRetry from "axios-retry";
 
 // Add retry logic to axios
-axiosRetry(axios, { 
-  retries: 3, 
-  retryDelay: axiosRetry.exponentialDelay, 
-  retryCondition: (error: AxiosError) => error.response?.status === 502, 
+axiosRetry(axios, {
+  retries: 3,
+  retryDelay: axiosRetry.exponentialDelay,
+  retryCondition: (error: AxiosError) => error.response?.status === 502,
   onRetry: (retryCount: number, error: AxiosError) => {
-    console.error(`Retrying OpenAI API request due to error: ${error}. Retry count: ${retryCount}`);
-  }
+    console.error(
+      `Retrying OpenAI API request due to error: ${error}. Retry count: ${retryCount}`
+    );
+  },
 });
 
 dotenv.config();
@@ -45,7 +47,6 @@ export async function updateDatabase({ item, new_value }: FunctionArgs) {
     message: `Update ${item} with new value: ${new_value}`,
     color: "green",
   });
-
 }
 
 export async function addToDatabase({ item, new_value }: FunctionArgs) {
@@ -57,9 +58,7 @@ export async function addToDatabase({ item, new_value }: FunctionArgs) {
       ids: [item],
       documents: [new_value],
     });
-
-  } catch (e) {
-  }
+  } catch (e) {}
 
   broadcast({
     is_server: true,
@@ -85,8 +84,8 @@ export async function OpenAIFuncRequest(
   maxDepth: number = 15 // Add a maximum depth to prevent infinite recursion
 ): Promise<string> {
   if (maxDepth <= 0) {
-    console.log('Max recursion depth reached, stopping...');
-    return '';
+    console.log("Max recursion depth reached, stopping...");
+    return "";
   }
 
   try {
@@ -96,12 +95,12 @@ export async function OpenAIFuncRequest(
       {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.OPENAI_API_KEY ?? ""}`,
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ""}`,
         },
-        timeout: 30000, // Wait for 30 seconds
+        timeout: 300000, // Wait for 30 seconds
       }
-      );
-      
+    );
+
     const data = res.data;
 
     if (data.choices[0].message.function_call) {
@@ -131,7 +130,6 @@ export async function OpenAIFuncRequest(
     throw new Error(`Error in OpenAI API request: ${error}`);
   }
 }
-
 
 export async function findAndUpdateWorldInformation({
   recentAction,
@@ -208,8 +206,8 @@ export async function findAndUpdateWorldInformation({
       functions,
       function_call: "auto",
     });
-    console.log(response + '\nreturning' || "no res. returning.");
-    return 
+    console.log(response + "\nreturning" || "no res. returning.");
+    return;
   } catch (e) {
     console.log("Error in findAndUpdateWorldInformation", e);
   }

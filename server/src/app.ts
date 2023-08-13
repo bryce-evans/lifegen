@@ -125,12 +125,17 @@ const startGame = async () => {
     embeddingFunction: embedder,
   });
 
+  console.log("DEBUG1");
+  console.log(actions_collection);
+  console.log(world_collection);
+
   broadcast({
     is_server: true,
     name: "server",
     message: `Initializing worldstate in chromadb...`,
     color: "red",
   });
+  console.log("DEBUG2");
 
   // for every item in WorldState, insert it into the 'world' collection
   await initializeWorldState(
@@ -138,6 +143,8 @@ const startGame = async () => {
     WORLD_STATE_COLLECTION_NAME,
     WorldState
   );
+
+  console.log("DEBUG3");
 
   let counter = 0;
   while (users.length > 1) {
