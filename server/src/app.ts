@@ -152,7 +152,9 @@ const startGame = async () => {
       counter += 1;
       const user = users[i];
 
+      console.log("DEBUG4");
       const previous_action: string = getPreviousAction(user);
+      console.log("DEBUG5");
       const other_actions: string = getOtherPlayersActions(user);
 
       // calculate available tokens in prompt (8k limit - 500 for the preamble, 1000 for response, - 1 token per 4 chars in other injected strings)
