@@ -137,12 +137,13 @@ export async function OpenAIRequest(payload: OpenAIRequestPayload) {
     // console.log(text);
     return text;
   } catch (error) {
+    console.error(error);
     const axiosError = error as AxiosError;
     // log the error response
     console.log(axiosError.response);
     // convert the response to a string and throw an error
     throw new Error(
-      `Error in OpenAI API request: ${axiosError.response?.data}`
+      `Error in OpenAI API request: ${axiosError}`
     );
   }
 }
