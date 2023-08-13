@@ -24,7 +24,7 @@ let messages: ChatMessages = [];
 
 app.post("/chat/", async (req: Request, res: Response) => {
   gameLog.push(req.body.actionRequest);
-  console.log('Message Received from Game Engine:', req.body.actionRequest);
+  console.log("Message Received from Game Engine:", req.body.actionRequest);
 
   ({ messages, summary, gameLog, actionLog } = await createMessagesArray(
     config.character_description,
@@ -40,21 +40,25 @@ app.post("/chat/", async (req: Request, res: Response) => {
     temperature: 1,
   });
 
+  console.log("openai outpit");
+  console.log(text);
   actionLog.push(text);
   res.status(200).json({ action: text });
 });
 
-try{
+try {
   app.listen(port, () => console.log(`Agent listening on port ${port}!`));
 } catch (e: any) {
-  if (e.code === 'EADDRINUSE') {
-    console.log(`Port ${port} is in use, edit the value of "port" in config.json and retry.`);
+  if (e.code === "EADDRINUSE") {
+    console.log(
+      `Port ${port} is in use, edit the value of "port" in config.json and retry.`
+    );
   } else {
     console.log(e);
   }
 }
 
-const serverUrl: string = config.server_url
+const serverUrl: string = config.server_url;
 
 let retries = 0;
 
@@ -88,6 +92,6 @@ const joinServer = (chatUrl: string) => {
   } else {
     url = `http://${network_url}:${port}`;
   }
-  console.log('agent URL:', url)
+  console.log("agent URL:", url);
   joinServer(`${url}/chat/`);
 })();

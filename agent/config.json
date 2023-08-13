@@ -1,7 +1,7 @@
 {
-  "character_name": "Gad4",
+  "character_name": "Sasha",
   "character_description": "You are going to play the role of a character in a fantasy world. Here is the information about your character: You are a funny guy",
-  "server_url": "http://localhost:3123",
-  "external_server": false,
+  "server_url": "https://65e410d2e274.ngrok.app",
+  "external_server": true,
   "port": 3114
 }
