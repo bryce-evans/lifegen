@@ -33,9 +33,10 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.listen(server_port, () =>
+const server = app.listen(server_port, () =>
   console.log(`AgentWorld server listening on port ${server_port}!`)
 );
+server.timeout = 600000;
 
 interface User {
   name: string;
@@ -181,6 +182,7 @@ const startGame = async () => {
         color: user.color,
       });
 
+      console.log("result action_prompt 7");
       // Assemble the prompt to send to the player
       const request_action_prompt = GenerateRequestNextActionPrompt(
         user.name,
@@ -188,8 +190,10 @@ const startGame = async () => {
         other_actions,
         world_state
       );
+      console.log("result action_prompt after 7");
 
       // use the prompt:
+      console.log("result action_request 8");
       const actionRequest = await OpenAIRequest({
         model: BASE_MODEL,
         messages: [
@@ -202,6 +206,7 @@ const startGame = async () => {
         max_tokens: MAX_RESPONSE_TOKENS,
         temperature: 0.5,
       });
+      console.log("result action_request after 8");
 
       broadcast({
         is_server: true,
